@@ -1,4 +1,4 @@
-## This function creates a special "matrix" object that can cache its inverse.
+# LEARN HOW FUNCTION WORKS
 
 makeCacheMatrix <- function(x = matrix()) {
         m <- NULL
@@ -16,16 +16,14 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 
-## This function computes the inverse of the special "matrix" returned by `makeCacheMatrix` above. If the inverse has already been calculated (and the matrix has not changed), then `cacheSolve` should retrieve the inverse from the cache.
-
-cacheSolve <- function(x, ...) {
-        m <- x$getsolve()
+cachemean <- function(x, ...) {
+        m <- x$getmean()
         if(!is.null(m)) {
                 message("getting cached data")
                 return(m)
         }
         data <- x$get()
-        m <- matrix(data, ...)
-        x$setmatrix(m)
+        m <- mean(data, ...)
+        x$setmean(m)
         m
 }
