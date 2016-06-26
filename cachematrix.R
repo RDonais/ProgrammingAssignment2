@@ -14,30 +14,58 @@ setwd(file.path("c:", "Users", "Rachel", "Documents", "R", "Week3", "Programming
 
 
 makeCacheMatrix <- function(x = matrix()) {
-        m <- NULL
+        s <- NULL
         set <- function(y) {
                 x <<- y
-                m <<- NULL
+                s <<- NULL
         }
         get <- function() x
-        setsolve <- function(solve) m <<- solve
-        getsolve <- function() m
+        setsolve <- function(solve) s <<- solve
+        getsolve <- function() s
         list(set = set, get = get,
              setsolve = setsolve,
              getsolve = getsolve)
 }
 
 
-## This function computes the inverse of the special "matrix" returned by `makeCacheMatrix` above. If the inverse has already been calculated (and the matrix has not changed), then `cacheSolve` should retrieve the inverse from the cache.
+
+## cacheSolve computes the inverse of the special "matrix" returned by `makeCacheMatrix` above. If the inverse has already been calculated (and the matrix has not changed), then `cacheSolve` should retrieve the inverse from the cache.
+
+# Only square matrices can be invertable. 
+## Not all square matrices are invertible
+## If a matrix is invertible, it is called invertible or nonsingular.
+## The original matrix returns when it's inverse is multiplied by the identity matrix.
+
+# Make X an invertible matrix
+
+x <- matrix(c(4,3,3,2), 2, 2) # This is an invertible matrix
+x
+
+# xi is inverse of x to test if cacheSolve function works (later on).
+xi <- matrix(c(-2,3,3,-4), 2,2)
+xi
+
+# need to turn makeCacheMatrix into an object because the functions are inside a list and cacheSolve will be accessing children functions through subsetting the list.
+m1 <- makeCacheMatrix(x)
+m1$get()
 
 cacheSolve <- function(x, ...) {
-        m <- x$getsolve()
-        if(!is.null(m)) {
+        s <- x$getsolve()
+        if(!is.null(s)) {
                 message("getting cached data")
-                return(m)
+                return(s)
         }
         data <- x$get()
-        m <- matrix(data, ...)
-        x$setmatrix(m)
-        m
+        s <- solve(data, ...)
+        x$setsolve(s)
+        s
 }
+
+
+cacheSolve(m1)
+cacheSolve(makeCacheMatrix(x))
+
+# Test if matrix was inverted
+# xi is inverse of x to test if cacheSolve function works (later on).
+xi <- matrix(c(-2,3,3,-4), 2,2)
+xi
