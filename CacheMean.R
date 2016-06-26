@@ -1,4 +1,6 @@
-# Example for assignment. 
+# Example for assignment.
+# Source/Reference: https://github.com/DanieleP/PA2-clarifying_instructions
+
 # makeVector is a function that stores a list of functions. 
 
 makeVector <- function(x = numeric()) {
@@ -15,7 +17,6 @@ makeVector <- function(x = numeric()) {
              getmean = getmean)
 }
 
-# Practice at: https://github.com/DanieleP/PA2-clarifying_instructions
 
 
 # Here is an easier example of a function that stores functions:
